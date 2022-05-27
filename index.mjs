@@ -27,12 +27,12 @@ async function main(sources) {
     feed.items.forEach((fi, i) => {
       let content
       try {
-        content = cliHtml(fi['content'])
+        content = cliHtml(fi['summary'] || fi['content'])
       } catch (error) {
         content = "unparsable content"
       }
 
-      console.log(chroma.bold.green(`${i+1}) ${fi['title']} (by ${fi['creator']})`))
+      console.log(chroma.bold.green(`${i+1}) ${fi['title']} (by ${fi['author'] || fi['creator']})`))
       console.log(`${content ?? ""}`)
       console.log(chroma.bold(`Link: ${fi['link']}`))
       console.log(chroma.bold(`Date: ${fi['pubDate']}`))
